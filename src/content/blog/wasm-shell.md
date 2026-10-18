@@ -53,14 +53,14 @@ verbatim into a static-site repository:
 
 ```sh
 make wasm-dist
-# dist/versa-wasm/
+# dist/versal-wasm/
 #   pkg/versa.js, pkg/versa_bg.wasm
 #   client.mjs, worker.mjs, worker-entry.mjs, gateway.mjs
 ```
 
 All imports inside the bundle are relative, so the directory works under any
 host or subpath without rewriting code. This site keeps it under
-`public/versa-wasm/`, where the static publisher copies it untouched.
+`public/versal-wasm/`, where the static publisher copies it untouched.
 
 ## What does not work (yet)
 

@@ -21,7 +21,7 @@ npm run preview    # serve the production build
 ```
 public/
   assets/shell.mjs        # terminal UI; talks to the wasm worker
-  versa-wasm/             # browser runtime bundle (generated, do not edit)
+  versal-wasm/             # browser runtime bundle (generated, do not edit)
 src/
   layouts/BaseLayout.astro
   pages/index.astro       # interactive shell
@@ -33,7 +33,7 @@ src/
 
 ## The wasm bundle
 
-`public/versa-wasm/` is **not committed** and is never built in this
+`public/versal-wasm/` is **not committed** and is never built in this
 repository. The engine repository
 ([versal-io/versalkv](https://github.com/versal-io/versalkv)) compiles it in
 its `Browser wasm bundle` workflow and publishes a rolling asset on the
@@ -46,7 +46,7 @@ Fetch it locally for development:
 ```sh
 npm run fetch-wasm
 # or pin a specific tarball:
-VERSA_WASM_URL=https://.../versa-wasm.tar.gz npm run fetch-wasm
+VERSAL_WASM_URL=https://.../versal-wasm.tar.gz npm run fetch-wasm
 ```
 
 All imports inside the bundle are relative; no path edits are required.

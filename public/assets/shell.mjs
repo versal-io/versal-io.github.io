@@ -1,6 +1,6 @@
-// In-browser Versal session. The runtime lives in /versa-wasm, assembled by
+// In-browser Versal session. The runtime lives in /versal-wasm, assembled by
 // `make wasm-dist` in the versa repository; keep that directory verbatim.
-import { VersaClient } from "../versa-wasm/client.mjs";
+import { VersaClient } from "../versal-wasm/client.mjs";
 
 const app = document.querySelector("#app");
 const bootScreen = document.querySelector("#boot-screen");
@@ -278,7 +278,7 @@ async function boot() {
   try {
     await delay(220);
     bootStatus.textContent = "Compiling WebAssembly module...";
-    ({ VersaClient } = await import("../versa-wasm/client.mjs"));
+    ({ VersaClient } = await import("../versal-wasm/client.mjs"));
     client = await VersaClient.create();
     await delay(160);
     bootStatus.textContent = "Warming command runtime...";

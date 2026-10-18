@@ -3,4 +3,4 @@ dist/
 .astro/
 .DS_Store
 npm-debug.log*
-public/versa-wasm/
+public/versal-wasm/
