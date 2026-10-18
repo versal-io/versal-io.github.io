@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const formatDate = (date) =>
+  `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}-${String(date.getUTCDate()).padStart(2, "0")}`;
+---
+
+<BaseLayout
+  title="Blog — versal"
+  description="Engineering notes on building a Valkey-compatible data store in Rust and WebAssembly."
+  currentPath="/blog/"
+>
+  <main class="page">
+    <div class="page-inner">
+      <div class="page-eyebrow">engineering blog</div>
+      <h1 class="page-title">Notes from the rewrite</h1>
+      <p class="page-date" style="margin-bottom: 8px">
+        Runtime architecture, compatibility milestones, and browser internals.
+      </p>
+      <nav class="post-list" aria-label="Blog posts">
+        {
+          posts.map((post) => (
+            <a class="post-item" href={`/blog/${post.id}/`}>
+              <span class="post-item-date">{formatDate(post.data.date)}</span>
+              <span class="post-item-title">{post.data.title}</span>
+              <span class="post-item-desc">{post.data.description}</span>
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,131 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="versal — valkey, rewritten in rust" currentPath="/">
+  <div id="boot-screen" role="status" aria-live="polite">
+    <div class="boot-panel">
+      <div class="boot-brand">
+        <div class="boot-logo">versal</div>
+        <div class="boot-subtitle">valkey, rewritten in rust</div>
+      </div>
+      <div class="boot-loader">
+        <div class="boot-spinner" aria-hidden="true"></div>
+        <div class="boot-status-wrap">
+          <div id="boot-status">Starting wasm32 engine...</div>
+          <div class="boot-hint">
+            First load compiles Versal in your browser. The command runtime is
+            warmed before the session opens.
+          </div>
+        </div>
+      </div>
+      <div class="boot-actions">
+        <a class="boot-link" href="/blog/welcome/">Read the intro →</a>
+        <a
+          class="boot-link"
+          href="https://github.com/versal-io"
+          target="_blank"
+          rel="noopener"
+        >
+          Open GitHub ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="app" class="app-loading">
+    <div class="app-layout">
+      <main class="main-pane">
+        <div class="session-bar">
+          <div class="session-meta">
+            <span class="session-title">versal · interactive session</span>
+            <span id="runner" class="query-runner" aria-live="polite">
+              <span class="query-runner-dot" aria-hidden="true"></span>
+              <span>running</span>
+            </span>
+          </div>
+          <div class="term-actions">
+            <button
+              id="btn-sidebar-toggle"
+              class="term-btn mobile-sidebar-toggle"
+              type="button"
+            >
+              Try example
+            </button>
+            <button id="btn-clear" class="term-btn term-btn-hide-mobile" type="button">
+              clear ^L
+            </button>
+            <button id="btn-reset" class="term-btn" type="button">reset</button>
+          </div>
+        </div>
+
+        <div id="scroll">
+          <div id="lines"></div>
+          <div class="input-row">
+            <span id="prompt">versal&gt;&nbsp;</span>
+            <textarea
+              id="input"
+              rows="1"
+              spellcheck="false"
+              autocomplete="off"
+              autocapitalize="off"
+              autocorrect="off"
+              aria-label="Command input"
+              disabled
+            ></textarea>
+          </div>
+        </div>
+      </main>
+
+      <aside class="side-panel" aria-label="Examples and about">
+        <div class="mobile-sidebar-head">
+          <span>Examples</span>
+          <button id="btn-sidebar-close" class="term-btn" type="button">
+            repl
+          </button>
+        </div>
+
+        <section class="panel-section">
+          <div class="panel-heading">Examples</div>
+          <div class="panel-subheading">Click to run it in the session.</div>
+          <div id="examples"></div>
+        </section>
+
+        <section class="panel-section about">
+          <div class="panel-heading" style="padding: 0 0 2px">About</div>
+          <p>
+            Versal is a Valkey-compatible in-memory data store rewritten from
+            scratch in Rust, speaking the RESP protocol.
+          </p>
+          <p>
+            This terminal is the real server compiled to WebAssembly. Commands
+            execute locally in a worker; data never leaves the tab and nothing
+            is sent to a server.
+          </p>
+          <p>
+            Versal is experimental and not production ready. Do not put data you
+            care about in it.
+          </p>
+        </section>
+
+        <section class="panel-section panel-section-last">
+          <div class="panel-heading" style="padding-bottom: 8px">More</div>
+          <div class="more-list">
+            <a
+              class="more-link"
+              href="https://github.com/versal-io"
+              target="_blank"
+              rel="noopener"
+            >
+              github.com/versal-io ↗
+            </a>
+            <a class="more-link" href="/blog/">engineering blog →</a>
+            <a class="more-link" href="/blog/welcome/">welcome post →</a>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <script type="module" src="/assets/shell.mjs"></script>
+</BaseLayout>

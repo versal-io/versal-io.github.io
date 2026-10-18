@@ -1,0 +1,17 @@
+{
+  "name": "versal-site",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Versal website and in-browser Valkey-compatible shell",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "fetch-wasm": "./scripts/fetch-wasm.sh",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^7.4.0"
+  }
+}
