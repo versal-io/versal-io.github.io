@@ -1,6 +1,6 @@
 // In-browser Versal session. The runtime lives in /versal-wasm, assembled by
-// `make wasm-dist` in the versa repository; keep that directory verbatim.
-import { VersaClient } from "../versal-wasm/client.mjs";
+// `make wasm-dist` in the versal repository; keep that directory verbatim.
+import { VersalClient } from "../versal-wasm/client.mjs";
 
 const app = document.querySelector("#app");
 const bootScreen = document.querySelector("#boot-screen");
@@ -19,7 +19,7 @@ const EXAMPLES = [
   "INCR visits",
   "RPUSH tasks alpha beta gamma",
   "LRANGE tasks 0 -1",
-  "HSET user:1 name versa role engine",
+  "HSET user:1 name versal role engine",
   "HGETALL user:1",
   "SADD tags rust wasm valkey",
   "SMEMBERS tags",
@@ -274,12 +274,12 @@ function leaveShellBlank() {
 }
 
 async function boot() {
-  let VersaClient;
+  let VersalClient;
   try {
     await delay(220);
     bootStatus.textContent = "Compiling WebAssembly module...";
-    ({ VersaClient } = await import("../versal-wasm/client.mjs"));
-    client = await VersaClient.create();
+    ({ VersalClient } = await import("../versal-wasm/client.mjs"));
+    client = await VersalClient.create();
     await delay(160);
     bootStatus.textContent = "Warming command runtime...";
     await client.execute(["PING"]);

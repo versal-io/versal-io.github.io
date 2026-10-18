@@ -19,12 +19,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # Rolling asset from the engine repository's pipeline. If the release
-      # or asset is missing, the site still builds; the shell section is
-      # rendered empty by the client.
-      - name: Fetch browser wasm bundle
-        continue-on-error: true
+
+      # Rust toolchain with the wasm32 target needed by make wasm-dist.
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      # Cache the versalkv build artifacts so repeated runs are fast.
+      # versalkv is cloned into the runner workspace (../versalkv).
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "../versalkv"
+
+      # wasm-pack drives the wasm-bindgen build inside make wasm-dist.
+      - name: Install wasm-pack
+        uses: jetli/wasm-pack-action@v0.4.0
+        with:
+          version: latest
+
+      # Clone versalkv (over HTTPS with a PAT), run make wasm-dist, and copy
+      # the bundle into public/versal-wasm/. See scripts/fetch-wasm.sh.
+      # The PAT needs read access to versalkv (classic token: repo scope;
+      # fine-grained token: Contents: Read). Store it as VERSALKV_TOKEN.
+      - name: Build wasm bundle
         run: ./scripts/fetch-wasm.sh
+        env:
+          VERSALKV_REMOTE: https://x-access-token:${{ secrets.VERSALKV_TOKEN }}@github.com/versal-io/versalkv.git
+
+      # Installs npm deps, builds the Astro site, and uploads the Pages
+      # artifact (including public/versal-wasm/ copied above).
       - uses: withastro/action@v4
 
   deploy:

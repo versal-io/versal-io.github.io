@@ -54,7 +54,7 @@ verbatim into a static-site repository:
 ```sh
 make wasm-dist
 # dist/versal-wasm/
-#   pkg/versa.js, pkg/versa_bg.wasm
+#   pkg/versal.js, pkg/versal_bg.wasm
 #   client.mjs, worker.mjs, worker-entry.mjs, gateway.mjs
 ```
 
