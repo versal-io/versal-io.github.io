@@ -45,6 +45,12 @@ if [ -d "$VERSALKV_DIR/.git" ]; then
   fi
 else
   echo "versalkv not found at $VERSALKV_DIR"
+  # If the directory exists but is not a git repo (e.g. CI restored only
+  # target/ via cache), remove it so git clone can proceed cleanly.
+  if [ -d "$VERSALKV_DIR" ]; then
+    echo "Removing stale non-repo directory at $VERSALKV_DIR"
+    rm -rf "$VERSALKV_DIR"
+  fi
   echo "Cloning $VERSALKV_REMOTE ($VERSALKV_REF) ..."
   case "$VERSALKV_REMOTE" in
     git@github.com:*)

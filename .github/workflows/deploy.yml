@@ -26,13 +26,6 @@ jobs:
         with:
           targets: wasm32-unknown-unknown
 
-      # Cache the versalkv build artifacts so repeated runs are fast.
-      # versalkv is cloned into the runner workspace (../versalkv).
-      - name: Cache Rust build
-        uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: "../versalkv"
-
       # wasm-pack drives the wasm-bindgen build inside make wasm-dist.
       - name: Install wasm-pack
         uses: jetli/wasm-pack-action@v0.4.0
